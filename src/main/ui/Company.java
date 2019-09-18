@@ -11,21 +11,21 @@ public class Company {
     public static Visitors vis;
 
     public Company() {
-        Company c = new Company();
     }
 
     public static void main(String[] args) {
+        Company c = new Company();
         System.out.println("Hello");
 //        if (Employees = true);
-        emp.greeting();
-        CheckIn.employeestay();
+        emp.greetingEmployees();
+        CheckIn.employeeStay();
         // timer will run
         // later reminder will activate when shift is almost over
-        CheckOut.employeeleave();
+        CheckOut.employeeLeave();
 //        else;
-        vis.greeting2();
-        CheckIn.visitorstay();
-        CheckOut.visitorleave();
+        vis.greetingVisitors();
+        CheckIn.visitorStay();
+        CheckOut.visitorLeave();
 
     }
 }

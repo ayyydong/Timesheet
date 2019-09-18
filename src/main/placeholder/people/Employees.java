@@ -7,7 +7,7 @@ public class Employees {
     this.ID = identity;
     }
 
-    public static void greeting() {
+    public static void greetingEmployees() {
         System.out.println("Welcome back to Company X!");
         System.out.println("Please enter your ID");
     }

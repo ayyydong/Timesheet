@@ -9,7 +9,7 @@ public class Visitors {
         person.name = name;
     }
 
-    public static void greeting2() {
+    public static void greetingVisitors() {
         System.out.println("Welcome to Company X!");
         System.out.println("Please enter your name");
     }
