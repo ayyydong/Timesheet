@@ -12,9 +12,7 @@ public class Company {
 
     public Company() {
         Company c = new Company();
-
     }
-
 
     public static void main(String[] args) {
         System.out.println("Hello");

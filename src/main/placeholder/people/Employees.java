@@ -12,7 +12,7 @@ public class Employees {
         System.out.println("Please enter your ID");
     }
 
-    private boolean IDcheck(Employees input) {
+    private boolean checkID(Employees input) {
         return (ID.equals(input));
 
 
