@@ -26,6 +26,5 @@ public class Company {
         vis.greetingVisitors();
         CheckIn.visitorStay();
         CheckOut.visitorLeave();
-
     }
 }
