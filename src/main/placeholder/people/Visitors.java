@@ -5,8 +5,7 @@ public class Visitors {
     public String name;
 
     public Visitors(String name) {
-        Visitors person = new Visitors(name);
-        person.name = name;
+        this.name = name;
     }
 
     public static void greetingVisitors() {

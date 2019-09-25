@@ -7,14 +7,12 @@ public class Employees {
         this.identity = identity;
     }
 
-    public static void greetingEmployees() {
+    public void greetingEmployees() {
         System.out.println("Welcome back to Company X!");
-        System.out.println("Please enter your identity");
+        System.out.println("Please enter your ID");
     }
 
-    private boolean checkID(Employees input) {
+    public boolean checkID(Employees input) {
         return (identity.equals(input));
-
-
     }
 }
