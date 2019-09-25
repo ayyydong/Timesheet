@@ -1,5 +1,4 @@
 package placeholder;
-import placeholder.people.Employees;
 
 public class CheckIn {
     private String message;
