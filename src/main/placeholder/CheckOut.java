@@ -1,12 +1,13 @@
 package placeholder;
 
-public class CheckOut {
+public interface CheckOut {
 
-    public static void visitorLeave() {
-        System.out.println("We hope you enjoyed your visit!");
-    }
+    // NEW EFFECTS: visitor and employee have checked out
+    // EFFECTS: implies that visitor has successfully checked out
+    void leave();
 
-    public static void employeeLeave() {
-        System.out.println("You have been successfully checked out.");
-    }
+//    void visitorLeave();
+//
+//    // EFFECTS: tells employee that they have checked out
+//    void employeeLeave();
 }

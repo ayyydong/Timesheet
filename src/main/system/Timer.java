@@ -1,18 +1,26 @@
 package system;
 
+// Represents an internal, built-in stopwatch
 public class Timer {
     public int time;
-    private int lasthour;
+    public int lasthour;
 
+    // REQUIRES: Integer time must be positive
+    // MODIFIES: this
+    // EFFECTS: sets the time remaining to be the input time
     public Timer(int time) {
         this.time = time;
         this.lasthour = 7;
     }
 
+    // REQUIRES: starting time must be <=0
+    // MODIFIES: this
+    // EFFECTS: timer will increment by 1 for every passing hour and
+    // notify employee until it reaches the 'lasthour'
     public void runningTimer() {
-        Timer t = new Timer(0);
+        Reminder r = new Reminder();
         for (int i = 0; i < 7; i++) {
-            Reminder.notifyEmployee(i);
+            r.notifyEmployee(i);
         }
     }
 

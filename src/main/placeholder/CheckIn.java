@@ -1,16 +1,10 @@
 package placeholder;
 
-public class CheckIn {
-    private String message;
+public interface CheckIn {
 
-    public CheckIn() {
-    }
+    // NEW EFFECTS: both visitor and employee have checked in
+    void stay();
 
-    public static void visitorStay() {
-        System.out.println("Enjoy your visit!");
-    }
-
-    public static void employeeStay() {
-        System.out.println("You have been successfully checked in.");
-    }
+    // NEW EFFECTS: both visitor and employee input strings
+    void greeting();
 }

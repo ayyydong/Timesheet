@@ -2,23 +2,59 @@ package ui;
 
 import placeholder.people.Employees;
 import placeholder.people.Visitors;
-import placeholder.CheckIn;
-import placeholder.CheckOut;
+//import placeholder.CheckIn;
+//import placeholder.CheckOut;
 import system.Timer;
 
 import java.util.Scanner;
 import java.util.ArrayList;
 
-
+// Represents the company (moved from main)
 public class Company {
     public Employees emp;
     public Visitors vis;
     public ArrayList<String> occupants;
     public Scanner scanner; // retrieved from LoggingCalculator
+    public Timer time;
 
     public Company() {
+        time = new Timer(6);
         occupants = new ArrayList<>();
-        scanner = new Scanner(System.in);// retrieved from LoggingCalculator
+        this.scanner = new Scanner(System.in);// retrieved from LoggingCalculator
+    }
+
+    //how to make this scanner accept multiple inputs? eg. Yes yes YES yeS
+    //how to make scanner only accept string inputs? certain length, regex (has to match format)
+    public void visitorOrEmployee(Company c, Scanner s, Visitors vis, Employees emp) {
+        System.out.println("Are you a visitor?");
+        if (s.nextLine().equals("yes")) {
+            vis.greeting();
+            s.nextLine();
+            vis.stay();
+            c.occupants.add("Andy");
+            c.occupants.add("Andy Jr");
+            vis.leave();
+            c.occupants.remove("Andy");
+            c.occupants.remove("Andy Jr");
+        } else {
+            isEmployee(c, s, emp);//, in, out);
+        }
+    }
+
+    public void isEmployee(Company c, Scanner s, Employees emp) {
+        emp.greeting();
+        if (emp.identityCorrect(s)) {
+            emp.stay();
+            c.occupants.add("Bob");
+            // timer will run
+            // later reminder will activate when shift is almost over
+            Timer t = time;
+            t.runningTimer();
+            emp.leave();
+            c.occupants.remove("Bob");
+        } else {
+            System.out.println("Incorrect ID. Please try again.");
+        }
     }
 
     public static void main(String[] args) {
@@ -26,29 +62,32 @@ public class Company {
         Scanner s = new Scanner(System.in);
         Employees emp = new Employees("v0g2b");
         Visitors vis = new Visitors("Andy");
-        // System.out.println("Hello");
-        // System.out.println("Are you a visitor?");
-        // s.nextLine();
-        // if (s.equals("Yes")) {
-        vis.greetingVisitors();
-        s.nextLine();
-        CheckIn.visitorStay();
-        c.occupants.add("Andy");
-        // c.occupants.add("Andy Jr");
-        CheckOut.visitorLeave();
-        c.occupants.remove("Andy");
-        // c.occupants.remove("Andy Jr");
-        // } else {
-        emp.greetingEmployees();
-        // System.out.print("");
-        // s.nextLine();
-        CheckIn.employeeStay();
-        c.occupants.add("Bob");
-        // timer will run
-        // later reminder will activate when shift is almost over
-        Timer t = new Timer(6);
-        t.runningTimer();
-        CheckOut.employeeLeave();
-        c.occupants.remove("Bob");
+//        CheckIn in = new CheckIn();
+//        CheckOut out = new CheckOut();
+        System.out.println("Hello");
+        c.visitorOrEmployee(c, s, vis, emp);//, in, out);
+//        System.out.println("Are you a visitor?");
+//        if (s.nextLine().equals("yes")) {
+//            vis.greetingVisitors();
+//            s.nextLine();
+//            in.visitorStay();
+//            c.occupants.add("Andy");
+//            c.occupants.add("Andy Jr");
+//            out.visitorLeave();
+//            c.occupants.remove("Andy");
+//            c.occupants.remove("Andy Jr");
+//        } else {
+//            emp.greetingEmployees();
+//            System.out.print("");
+//            s.nextLine();
+//            in.employeeStay();
+//            c.occupants.add("Bob");
+//            // timer will run
+//            // later reminder will activate when shift is almost over
+//            Timer t = new Timer(6);
+//            t.runningTimer();
+//            out.employeeLeave();
+//            c.occupants.remove("Bob");
+//      }
     }
 }
