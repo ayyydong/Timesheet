@@ -1,4 +1,4 @@
-package system;
+package ui;
 
 // Represents an internal, built-in stopwatch
 public class Timer {

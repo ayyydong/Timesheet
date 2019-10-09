@@ -1,4 +1,4 @@
-package system;
+package ui;
 
 
 public class VisitTime extends AbstractClass {

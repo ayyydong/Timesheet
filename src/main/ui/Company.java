@@ -4,8 +4,6 @@ import placeholder.people.Employees;
 import placeholder.people.Visitors;
 //import placeholder.CheckIn;
 //import placeholder.CheckOut;
-import system.Timer;
-import system.VisitTime;
 
 import java.util.Scanner;
 import java.util.ArrayList;

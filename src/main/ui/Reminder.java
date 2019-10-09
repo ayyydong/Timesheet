@@ -1,4 +1,4 @@
-package system;
+package ui;
 
 public class Reminder extends AbstractClass {
     int num;

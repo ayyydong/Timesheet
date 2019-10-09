@@ -1,4 +1,4 @@
-package system;
+package ui;
 
 public abstract class AbstractClass {
     public int time;

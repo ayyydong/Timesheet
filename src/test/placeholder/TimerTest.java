@@ -1,9 +1,6 @@
 package placeholder;
 
-import system.Reminder;
-import system.Timer;
-
-import static org.junit.jupiter.api.Assertions.*;
+import ui.Timer;
 
 class TimerTest {
     public Timer timer;

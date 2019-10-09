@@ -3,11 +3,9 @@ package placeholder;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,6 +27,7 @@ public class ToDoListTest {
     @Test
     public void saveAndLoadTest() throws IOException {
         ToDoList.save("Andy");
-        assertFalse("outputfile.txt".isEmpty());
+//        assertFalse("outputfile.txt".isEmpty());
+//        assertTrue("outputfile.txt".contains("Andy"));
     }
 }
