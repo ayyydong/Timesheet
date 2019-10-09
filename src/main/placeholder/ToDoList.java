@@ -24,16 +24,17 @@ public class ToDoList {
 
     // this code was taken from FileReaderWriter project and modified
     public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(System.in);
         load();
-        save();
+        save(scanner.nextLine());
     }
 
 
-    public static void save() throws IOException {
-        Scanner scanner = new Scanner(System.in);
+    public static void save(String in) throws IOException {
+//        Scanner scanner = new Scanner(System.in);
         List<String> lines = Files.readAllLines(Paths.get("inputfile.txt"));
         PrintWriter writer = new PrintWriter("outputfile.txt", "UTF-8");
-        lines.add(scanner.nextLine());
+        lines.add(in);
         for (String line : lines) {
             writer.println(line);
         }

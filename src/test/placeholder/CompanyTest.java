@@ -27,6 +27,10 @@ class CompanyTest {
     }
 
     @Test
+    public void visitorOrEmployeeTest() {
+    }
+
+    @Test
     public void testContainsBob() {
         assertFalse(comp.occupants.contains("Andy"));
         assertFalse(comp.occupants.contains("Bob"));
