@@ -3,12 +3,13 @@ package placeholder.people;
 import placeholder.CheckIn;
 import placeholder.CheckOut;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 // Represents the company employees
-public class Employees implements CheckIn, CheckOut {
+public class Employees implements CheckIn, CheckOut, Serializable {
     public String identity;
     List<String> instantiate;
 

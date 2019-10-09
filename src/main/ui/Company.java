@@ -5,6 +5,7 @@ import placeholder.people.Visitors;
 //import placeholder.CheckIn;
 //import placeholder.CheckOut;
 import system.Timer;
+import system.VisitTime;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -16,8 +17,10 @@ public class Company {
     public ArrayList<String> occupants;
     public Scanner scanner; // retrieved from LoggingCalculator
     public Timer time;
+    public VisitTime vist;
 
     public Company() {
+        vist = new VisitTime(0);
         time = new Timer(6);
         occupants = new ArrayList<>();
         this.scanner = new Scanner(System.in);// retrieved from LoggingCalculator
@@ -33,6 +36,10 @@ public class Company {
             vis.stay();
             c.occupants.add("Andy");
             c.occupants.add("Andy Jr");
+            System.out.println("Press quit when you leave");
+            if (s.nextLine().equals("quit")) {
+                vist.notifies(0);
+            }
             vis.leave();
             c.occupants.remove("Andy");
             c.occupants.remove("Andy Jr");
@@ -43,19 +50,20 @@ public class Company {
 
     public void isEmployee(Company c, Scanner s, Employees emp) {
         emp.greeting();
-        if (emp.identityCorrect(s)) {
-            emp.stay();
-            c.occupants.add("Bob");
-            // timer will run
-            // later reminder will activate when shift is almost over
-            Timer t = time;
-            t.runningTimer();
-            emp.leave();
-            c.occupants.remove("Bob");
-        } else {
-            System.out.println("Incorrect ID. Please try again.");
-        }
+        scanner.nextLine();
+//        if (emp.identityCorrect(s)) {
+        emp.stay();
+        c.occupants.add("Bob");
+        // timer will run
+        // later reminder will activate when shift is almost over
+        Timer t = time;
+        t.runningTimer();
+        emp.leave();
+        c.occupants.remove("Bob");
+//        } else {
+//            System.out.println("Incorrect ID. Please try again.");
     }
+//    }
 
     public static void main(String[] args) {
         Company c = new Company();
