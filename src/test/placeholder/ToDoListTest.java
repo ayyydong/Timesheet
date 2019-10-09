@@ -27,7 +27,7 @@ public class ToDoListTest {
     }
 
     @Test
-    public void saveAndLoadTest() throws IOException{
+    public void saveAndLoadTest() throws IOException {
         ToDoList.save("Andy");
         assertFalse("outputfile.txt".isEmpty());
     }
