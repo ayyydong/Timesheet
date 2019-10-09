@@ -1,5 +1,6 @@
 package placeholder;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,6 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ToDoListTest {
     List<String> lines;
+
+
+    @BeforeEach
+    public void runBefore() throws IOException {
+        lines = Files.readAllLines(Paths.get("outputfile.txt"));
+    }
 
     @Test
     public void InputFileSizeTest() throws IOException {
@@ -27,6 +34,9 @@ public class ToDoListTest {
     @Test
     public void saveAndLoadTest() throws IOException {
         ToDoList.save("Andy");
+        assertFalse(lines.isEmpty());
+        assertTrue(lines.contains("Andy"));
+        assertFalse(lines.contains("Fail"));
 //        assertFalse("outputfile.txt".isEmpty());
 //        assertTrue("outputfile.txt".contains("Andy"));
     }
