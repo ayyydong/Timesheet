@@ -3,7 +3,6 @@ package placeholder.people;
 import placeholder.ToDoList;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Employer extends Employees {
     private ToDoList toDoList;
