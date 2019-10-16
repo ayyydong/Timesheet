@@ -31,11 +31,4 @@ public class Visitors implements CheckIn, CheckOut {
     public void leave() {
         System.out.println("We hope you enjoyed your visit!");
     }
-
-//
-//    // EFFECTS: the visitor is greeted and asked for name
-//    public void greetingVisitors() {
-//        System.out.println("Welcome to Company X!");
-//        System.out.println("Please enter your name");
-//    }
 }

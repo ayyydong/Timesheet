@@ -1,14 +1,13 @@
-package ui;
+package system;
 
-public class Reminder extends AbstractClass {
-    int num;
+public class WorkingTime extends Alert {
 
     // CONSTRUCTOR...blank for now
-    public Reminder(int time) {
+    public WorkingTime(int time) {
         super(time);
     }
 
-    // REQUIRES: Integer i must be positive
+    // REQUIRES: Integer count must be positive
     // EFFECTS: Notifies the employee about how long he/she has worked
     // and when their shift is almost over
     @Override
@@ -19,13 +18,4 @@ public class Reminder extends AbstractClass {
             System.out.println("Your shift is almost over!");
         }
     }
-
-//    @Override
-//    public void notifies(int i) {
-//        if (i < 6) {
-//            System.out.println("You have worked for " + i + " hours");
-//        } else {
-//            System.out.println("Your shift is almost over!");
-//        }
-//    }
 }

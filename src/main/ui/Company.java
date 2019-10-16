@@ -1,32 +1,31 @@
 package ui;
 
-import placeholder.people.Employees;
+import placeholder.people.InvalidException;
 import placeholder.people.Visitors;
-//import placeholder.CheckIn;
-//import placeholder.CheckOut;
+import placeholder.people.Employer;
+import system.TimeException;
+import system.Timer;
+import system.VisitTime;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 // Represents the company (moved from main)
 public class Company {
-    public Employees emp;
-    public Visitors vis;
     public ArrayList<String> occupants;
-    public Scanner scanner; // retrieved from LoggingCalculator
     public Timer time;
-    public VisitTime vist;
+    public VisitTime visT;
+    protected UserInput input;
 
     public Company() {
-        vist = new VisitTime(0);
+        visT = new VisitTime(0);
         time = new Timer(6);
         occupants = new ArrayList<>();
-        this.scanner = new Scanner(System.in);// retrieved from LoggingCalculator
+        input = new UserInput();
     }
 
-    //how to make this scanner accept multiple inputs? eg. Yes yes YES yeS
-    //how to make scanner only accept string inputs? certain length, regex (has to match format)
-    public void visitorOrEmployee(Company c, Scanner s, Visitors vis, Employees emp) {
+    public void visitorOrMember(Company c, Scanner s, Visitors vis, Employer emp) throws IOException, TimeException {
         System.out.println("Are you a visitor?");
         if (s.nextLine().equals("yes")) {
             vis.greeting();
@@ -36,64 +35,46 @@ public class Company {
             c.occupants.add("Andy Jr");
             System.out.println("Press quit when you leave");
             if (s.nextLine().equals("quit")) {
-                vist.notifies(0);
+                visT.notifies(time.lasthour);
+                vis.leave();
+                c.occupants.remove("Andy");
+                c.occupants.remove("Andy Jr");
             }
-            vis.leave();
-            c.occupants.remove("Andy");
-            c.occupants.remove("Andy Jr");
         } else {
-            isEmployee(c, s, emp);//, in, out);
+            isMember(emp, s);
         }
     }
 
-    public void isEmployee(Company c, Scanner s, Employees emp) {
-        emp.greeting();
-        scanner.nextLine();
-//        if (emp.identityCorrect(s)) {
-        emp.stay();
-        c.occupants.add("Bob");
-        // timer will run
-        // later reminder will activate when shift is almost over
-        Timer t = time;
-        t.runningTimer();
-        emp.leave();
-        c.occupants.remove("Bob");
-//        } else {
-//            System.out.println("Incorrect ID. Please try again.");
-    }
-//    }
+    // must type v0g2b, don't know how to fix complicated bug, also something wrong with change
 
-    public static void main(String[] args) {
+    public void isMember(Employer emp, Scanner s) throws IOException, TimeException {
+        emp.greeting();
+        try {
+            emp.identityCorrect(s.nextLine());
+            emp.stay();
+            if (input.requestChange()) {
+                input.command();
+            }
+            Timer t = time;
+            t.runningTimer();
+            emp.leave();
+        } catch (InvalidException e) {
+            System.out.println("Invalid ID. Please try again");
+        } finally {
+            System.out.println("Still deciding what to put here...");
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
         Company c = new Company();
         Scanner s = new Scanner(System.in);
-        Employees emp = new Employees("v0g2b");
+        Employer emp = new Employer("v0g2b");
         Visitors vis = new Visitors("Andy");
-//        CheckIn in = new CheckIn();
-//        CheckOut out = new CheckOut();
         System.out.println("Hello");
-        c.visitorOrEmployee(c, s, vis, emp);//, in, out);
-//        System.out.println("Are you a visitor?");
-//        if (s.nextLine().equals("yes")) {
-//            vis.greetingVisitors();
-//            s.nextLine();
-//            in.visitorStay();
-//            c.occupants.add("Andy");
-//            c.occupants.add("Andy Jr");
-//            out.visitorLeave();
-//            c.occupants.remove("Andy");
-//            c.occupants.remove("Andy Jr");
-//        } else {
-//            emp.greetingEmployees();
-//            System.out.print("");
-//            s.nextLine();
-//            in.employeeStay();
-//            c.occupants.add("Bob");
-//            // timer will run
-//            // later reminder will activate when shift is almost over
-//            Timer t = new Timer(6);
-//            t.runningTimer();
-//            out.employeeLeave();
-//            c.occupants.remove("Bob");
-//      }
+        try {
+            c.visitorOrMember(c, s, vis, emp);
+        } catch (TimeException e) {
+            System.out.println("Time cannot be negative!");
+        }
     }
 }

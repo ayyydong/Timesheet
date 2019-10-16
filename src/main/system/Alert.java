@@ -1,13 +1,13 @@
-package ui;
+package system;
 
-public abstract class AbstractClass {
+public abstract class Alert {
     public int time;
 
-    public AbstractClass(int time) {
+    public Alert(int time) {
         this.time = time;
     }
 
-    // REQUIRES: Integer i must be positive
+    // REQUIRES: Integer count must be positive
     // EFFECTS: Notifies the employee about how long he/she has worked
     // and when their shift is almost over
     public abstract void notifies(int num);
