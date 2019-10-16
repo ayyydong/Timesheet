@@ -18,4 +18,19 @@ class VisitorsTest {
         assertEquals("Andy",(visitors.name));
         assertFalse("AndyJr".equals(visitors.name));
     }
+
+    @Test
+    public void greetingTest() {
+        visitors.greeting();
+    }
+
+    @Test
+    public void stayTest() {
+        visitors.stay();
+    }
+
+    @Test
+    public void leaveTest() {
+        visitors.leave();
+    }
 }

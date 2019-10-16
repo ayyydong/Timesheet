@@ -35,6 +35,7 @@ public class ToDoListTest {
     //replacing is not working!
     @Test
     public void saveAndLoadTest() throws IOException {
+        todo.load("Andy");
         for (int i = 0; i < 5; i++) {
             todo.save("Andy"); //should actually be save, but load isnt working
         }

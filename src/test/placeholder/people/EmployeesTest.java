@@ -24,4 +24,19 @@ class EmployeesTest {
         assertEquals("a5h2v",(employees.identity));
         assertFalse("v5g2b" == (employees.identity));
     }
+
+    @Test
+    public void greetingTest() {
+        employees.greeting();
+    }
+
+    @Test
+    public void stayTest() {
+        employees.stay();
+    }
+
+    @Test
+    public void leaveTest() {
+        employees.leave();
+    }
 }
