@@ -13,5 +13,7 @@ public class Visitor extends Person {
     // EFFECTS: sets the given visitor name in the company
     public Visitor(String name) {
         this.name = name;
+        checkIn = new CheckIn();
+        checkOut = new CheckOut();
     }
 }

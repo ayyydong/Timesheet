@@ -17,6 +17,8 @@ public class Worker extends Person {
     // EFFECTS: sets the given visitor name in the company
     public Worker(String identity) {
         this.identity = identity;
+        checkIn = new CheckIn();
+        checkOut = new CheckOut();
     }
 
     public void addEmployer(Employer employer) {
@@ -34,23 +36,26 @@ public class Worker extends Person {
     }
 
     // EFFECTS: the worker is greeted and asked for name
+    @Override
     public void greeting() {
-        System.out.println("Welcome back to Company X!");
-        System.out.println("Please enter your ID");
-//        checkIn.greeting("Welcome back to Company X!");
-//        checkIn.greeting("Please enter your ID");
+//        System.out.println("Welcome back to Company X!");
+//        System.out.println("Please enter your ID");
+        checkIn.greeting("Welcome back to Company X!");
+        checkIn.greeting("Please enter your ID");
     }
 
     // EFFECTS: implies that worker has successfully checked in
+    @Override
     public void stay() {
-        System.out.println("You have been successfully checked in.");
-//        checkIn.stay("You have been successfully checked in.");
+//        System.out.println("You have been successfully checked in.");
+        checkIn.stay("You have been successfully checked in.");
     }
 
     // EFFECTS: implies that worker has successfully checked out
+    @Override
     public void leave() {
-        System.out.println("You have been successfully checked out.");
-//        checkOut.leave("You have been successfully checked out.");
+//        System.out.println("You have been successfully checked out.");
+        checkOut.leave("You have been successfully checked out.");
     }
 
     @Override

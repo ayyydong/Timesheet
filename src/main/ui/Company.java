@@ -19,7 +19,7 @@ public class Company {
     protected UserInput input;
 
     Employer emp = new Employer("v0g2b");
-    Visitor vis = new Visitor("Andy");
+    Person vis = new Visitor("Andy");
     Employer andy = new Employer("Andy");
     Worker andyJr = new Worker("AndyJr");
     Worker andySr = new Worker("AndySr");
