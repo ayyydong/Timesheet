@@ -24,10 +24,10 @@ public class ToDoList {
     // this code was taken from FileReaderWriter project and modified
     public void save(String in) throws IOException {
         Employer employ = new Employer("v0g2b");
-        PrintWriter existingInfo = new PrintWriter("inputfile.txt", "UTF-8");
+        PrintWriter existingInfo = new PrintWriter("./data/inputfile.txt", "UTF-8");
         existingInfo.println(employ.identity); //prints all company id's in inputfile
-        inputline = Files.readAllLines(Paths.get("inputfile.txt")); //reads inputfile
-        PrintWriter writer = new PrintWriter("outputfile.txt", "UTF-8");
+        inputline = Files.readAllLines(Paths.get("./data/inputfile.txt")); //reads inputfile
+        PrintWriter writer = new PrintWriter("./data/outputfile.txt", "UTF-8");
         inputline.add(in); //add line to whatever is read
         for (String line : inputline) {
             writer.println(line);
@@ -37,7 +37,7 @@ public class ToDoList {
 
     // TODO: change lines.get(counter)
     public void load(String out) throws IOException {
-        outputline = Files.readAllLines(Paths.get("outputfile.txt"));
+        outputline = Files.readAllLines(Paths.get("./data/outputfile.txt"));
         for (String line : outputline) {
             if (line.matches(out)) {
                 line.replace(line, out);//, changed);

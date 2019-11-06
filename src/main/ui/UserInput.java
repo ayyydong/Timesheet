@@ -18,6 +18,7 @@ public class UserInput {
     }
 
     public void command() throws IOException {
+        Company c = new Company();
         Employer employ = new Employer("v0g2b");
         System.out.println("Whose ID do you want to change?");
 //        System.out.println("What do you want to change it to?");

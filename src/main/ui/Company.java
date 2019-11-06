@@ -1,63 +1,83 @@
 package ui;
 
-import placeholder.people.InvalidException;
-import placeholder.people.Visitors;
-import placeholder.people.Employer;
+import placeholder.people.*;
 import system.TimeException;
 import system.Timer;
-import system.VisitTime;
+import system.VisitAlert;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 // Represents the company (moved from main)
 public class Company {
-    public ArrayList<String> occupants;
+    public Map<Employer, ArrayList<Worker>> occupants = new HashMap<>();
     public Timer time;
-    public VisitTime visT;
+    public VisitAlert visT;
     protected UserInput input;
 
+    Employer emp = new Employer("v0g2b");
+    Visitor vis = new Visitor("Andy");
+    Employer andy = new Employer("Andy");
+    Worker andyJr = new Worker("AndyJr");
+    Worker andySr = new Worker("AndySr");
+    ArrayList<Worker> members = new ArrayList<>();
+    Scanner scanner = new Scanner(System.in);
+
     public Company() {
-        visT = new VisitTime(0);
+        visT = new VisitAlert(0);
         time = new Timer(6);
-        occupants = new ArrayList<>();
         input = new UserInput();
     }
 
-    public void visitorOrMember(Company c, Scanner s, Visitors vis, Employer emp) throws IOException, TimeException {
+    public void visitorOrMember() throws IOException, TimeException {
         System.out.println("Are you a visitor?");
-        if (s.nextLine().equals("yes")) {
+        if (scanner.nextLine().equalsIgnoreCase("yes")) {
             vis.greeting();
-            s.nextLine();
+            scanner.nextLine();
             vis.stay();
-            c.occupants.add("Andy");
-            c.occupants.add("Andy Jr");
             System.out.println("Press quit when you leave");
-            if (s.nextLine().equals("quit")) {
+            if (scanner.nextLine().equals("quit")) {
                 visT.notifies(time.lasthour);
                 vis.leave();
-                c.occupants.remove("Andy");
-                c.occupants.remove("Andy Jr");
             }
         } else {
-            isMember(emp, s);
+            isMember();
+        }
+    }
+
+    public void foreachTest() {
+        String identity = members.get(0).identity;
+        for (Worker worker : members) {
+            if (worker.identity == members.get(0).identity) { //testing if hashcode compares identity strings
+                System.out.println(identity);
+                members.remove(worker);
+                identity = members.get(0).identity;
+                System.out.println(identity);
+                System.out.println(andy.getEmployees());
+                System.out.println(andyJr.getEmployers());
+            }
         }
     }
 
     // must type v0g2b, don't know how to fix complicated bug, also something wrong with change
 
-    public void isMember(Employer emp, Scanner s) throws IOException, TimeException {
+    public void isMember() throws IOException, TimeException {
         emp.greeting();
         try {
-            emp.identityCorrect(s.nextLine());
+            emp.identityCorrect(scanner.nextLine());
             emp.stay();
+            occupants.put(andy, members);
+            members.add(andyJr);
+            members.add(andySr);
             if (input.requestChange()) {
                 input.command();
             }
-            Timer t = time;
-            t.runningTimer();
+            time.runningTimer();
             emp.leave();
+            foreachTest();
         } catch (InvalidException e) {
             System.out.println("Invalid ID. Please try again");
         } finally {
@@ -67,12 +87,9 @@ public class Company {
 
     public static void main(String[] args) throws IOException {
         Company c = new Company();
-        Scanner s = new Scanner(System.in);
-        Employer emp = new Employer("v0g2b");
-        Visitors vis = new Visitors("Andy");
         System.out.println("Hello");
         try {
-            c.visitorOrMember(c, s, vis, emp);
+            c.visitorOrMember();
         } catch (TimeException e) {
             System.out.println("Time cannot be negative!");
         }

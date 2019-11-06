@@ -1,7 +1,9 @@
 package placeholder;
 
-public interface CheckOut {
+public class CheckOut {
 
     // EFFECTS: visitor and employee have checked out
-    void leave();
+    public void leave(String s) {
+        System.out.println(s);
+    }
 }

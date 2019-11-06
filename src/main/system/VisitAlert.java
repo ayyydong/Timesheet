@@ -1,9 +1,8 @@
 package system;
 
+public class VisitAlert extends Alert {
 
-public class VisitTime extends Alert {
-
-    public VisitTime(int time) {
+    public VisitAlert(int time) {
         super(time);
     }
 

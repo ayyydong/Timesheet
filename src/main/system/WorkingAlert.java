@@ -1,9 +1,9 @@
 package system;
 
-public class WorkingTime extends Alert {
+public class WorkingAlert extends Alert {
 
     // CONSTRUCTOR...blank for now
-    public WorkingTime(int time) {
+    public WorkingAlert(int time) {
         super(time);
     }
 

@@ -1,10 +1,14 @@
 package placeholder;
 
-public interface CheckIn {
+public class CheckIn {
 
     // NEW EFFECTS: both visitor and employee have checked in
-    void stay();
+    public void stay(String s) {
+        System.out.println(s);
+    }
 
     // NEW EFFECTS: both visitor and employee input strings
-    void greeting();
+    public void greeting(String s) {
+        System.out.println(s);
+    }
 }

@@ -5,32 +5,32 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VisitorsTest {
-    private Visitors visitors;
+class VisitorTest {
+    private Visitor visitor;
 
     @BeforeEach
     public void runBefore() {
-        visitors = new Visitors("Andy");
+        visitor = new Visitor("Andy");
     }
 
     @Test
     public void nameMatchesTest() {
-        assertEquals("Andy",(visitors.name));
-        assertFalse("AndyJr".equals(visitors.name));
+        assertEquals("Andy",(visitor.name));
+        assertFalse("AndyJr".equals(visitor.name));
     }
 
     @Test
     public void greetingTest() {
-        visitors.greeting();
+        visitor.greeting();
     }
 
     @Test
     public void stayTest() {
-        visitors.stay();
+        visitor.stay();
     }
 
     @Test
     public void leaveTest() {
-        visitors.leave();
+        visitor.leave();
     }
 }

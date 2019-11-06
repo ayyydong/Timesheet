@@ -18,15 +18,15 @@ public class ToDoListTest {
 
     @BeforeEach
     public void runBefore() throws IOException {
-        lines = Files.readAllLines(Paths.get("outputfile.txt"));
-        lines2 = Files.readAllLines(Paths.get("inputfile.txt"));
+        lines = Files.readAllLines(Paths.get("./data/outputfile.txt"));
+        lines2 = Files.readAllLines(Paths.get("./data/inputfile.txt"));
         todo = new ToDoList();
     }
 
     @Test
     public void OutputFileSizeTest() throws IOException {
         todo.save("Hello");
-        lines = Files.readAllLines(Paths.get("outputfile.txt"));
+        lines = Files.readAllLines(Paths.get("./data/outputfile.txt"));
         assertEquals(lines.size(), 1);
         assertFalse(lines.size() == 2);
     }

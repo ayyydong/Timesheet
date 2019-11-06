@@ -2,14 +2,30 @@ package placeholder.people;
 
 import placeholder.ToDoList;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.io.IOException;
 
-public class Employer extends Employees {
+public class Employer extends Worker {
     private ToDoList toDoList;
+    Set<Worker> employees = new HashSet<>();
 
     public Employer(String identity) {
         super(identity);
         toDoList = new ToDoList();
+    }
+
+    public void addEmployees(Worker employee) {
+        employee.addEmployer(this);
+        employees.add(employee);
+    }
+    public Set<Worker> getEmployees() {
+        return employees;
+    }
+
+    public void removeEmployee(Worker employee) {
+        employees.remove(employee);
+        employee.removeEmployer();
     }
 
     //save will be user input

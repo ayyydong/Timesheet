@@ -22,8 +22,8 @@ public class Timer {
         if (time < 0) {
             throw new TimeException();
         }
-        VisitTime v = new VisitTime(time);
-        WorkingTime r = new WorkingTime(time);
+        VisitAlert v = new VisitAlert(time);
+        WorkingAlert r = new WorkingAlert(time);
         for (time = 0; time < lasthour; time++) {
             r.notifies(time);
         }

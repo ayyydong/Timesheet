@@ -4,22 +4,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class WorkingTimeTest {
-    public WorkingTime workingTime;
+public class WorkingAlertTest {
+    public WorkingAlert workingAlert;
 
     @BeforeEach
     public void runBefore() {
-        workingTime = new WorkingTime(10);
+        workingAlert = new WorkingAlert(10);
     }
 
     @Test
     public void wTimeTest() {
-        assertEquals(10, workingTime.time);
-        assertFalse(11 == workingTime.time);
+        assertEquals(10, workingAlert.time);
+        assertFalse(11 == workingAlert.time);
     }
 
     @Test
     public void notifiesTest() {
-        workingTime.notifies(8);
+        workingAlert.notifies(8);
     }
 }
