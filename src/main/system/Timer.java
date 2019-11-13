@@ -4,6 +4,7 @@ package system;
 public class Timer {
     public int lasthour;
     public int time;
+    WorkingAlert workingAlert;
 
     // REQUIRES: Integer time must be positive
     // MODIFIES: this
@@ -11,6 +12,7 @@ public class Timer {
     public Timer(int time) {
         this.time = time;
         this.lasthour = 6;
+        workingAlert = new WorkingAlert(time);
     }
 
 
@@ -22,12 +24,9 @@ public class Timer {
         if (time < 0) {
             throw new TimeException();
         }
-        VisitAlert v = new VisitAlert(time);
-        WorkingAlert r = new WorkingAlert(time);
         for (time = 0; time < lasthour; time++) {
-            r.notifies(time);
+            workingAlert.notifies(time);
         }
-        v.notifies(time);
         //TODO: we'll keep it like this for now, need fixing; Use the final count from forloop
     }
 }

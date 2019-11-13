@@ -8,6 +8,7 @@ public abstract class Person {
     CheckOut checkOut;
 
     // EFFECTS: the visitor is greeted and asked for name
+    // TODO: refactor
     public void greeting() {
         System.out.println("Welcome to Company X!");
         System.out.println("Please enter your name");

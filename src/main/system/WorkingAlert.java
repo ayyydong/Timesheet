@@ -14,8 +14,9 @@ public class WorkingAlert extends Alert {
     public void notifies(int num) {
         if (num < 6) {
             System.out.println("You have worked for " + num + " hours");
-        } else {
-            System.out.println("Your shift is almost over!");
+            if (num == 5) {
+                System.out.println("Your shift is almost over!");
+            }
         }
     }
 }

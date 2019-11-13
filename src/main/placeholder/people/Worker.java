@@ -3,9 +3,6 @@ package placeholder.people;
 import placeholder.CheckIn;
 import placeholder.CheckOut;
 
-import java.util.ArrayList;
-
-
 // Represents the company employees
 public class Worker extends Person {
     CheckIn checkIn;
@@ -22,13 +19,20 @@ public class Worker extends Person {
     }
 
     public void addEmployer(Employer employer) {
+        if (this.employer != employer) {
+            removeEmployer();
+        }
         this.employer = employer;
-        employer.addEmployees(this);
+        employer.assignEmployees(this);
     }
 
+    //EFFECTS: remove the current Employer assigned to Employees
     public void removeEmployer() {
-        employer.removeEmployee(this);
-        this.employer = null;
+        if (employer != null) {
+            Employer emp = employer;
+            this.employer = null;
+            emp.removeEmployee(this);
+        }
     }
 
     public Employer getEmployers() {
@@ -38,8 +42,6 @@ public class Worker extends Person {
     // EFFECTS: the worker is greeted and asked for name
     @Override
     public void greeting() {
-//        System.out.println("Welcome back to Company X!");
-//        System.out.println("Please enter your ID");
         checkIn.greeting("Welcome back to Company X!");
         checkIn.greeting("Please enter your ID");
     }
@@ -47,14 +49,12 @@ public class Worker extends Person {
     // EFFECTS: implies that worker has successfully checked in
     @Override
     public void stay() {
-//        System.out.println("You have been successfully checked in.");
         checkIn.stay("You have been successfully checked in.");
     }
 
     // EFFECTS: implies that worker has successfully checked out
     @Override
     public void leave() {
-//        System.out.println("You have been successfully checked out.");
         checkOut.leave("You have been successfully checked out.");
     }
 
@@ -78,5 +78,4 @@ public class Worker extends Person {
         int result = identity.hashCode();
         return result;
     }
-
 }
