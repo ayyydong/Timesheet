@@ -7,16 +7,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WorkerTest {
     public Worker worker;
+    public Employer employer;
+    public Employer employer2;
 
     @BeforeEach
     public void runBefore() {
         worker = new Worker("a5h2v");
+        employer = new Employer("v0g2b");
+        employer2 = new Employer("fake");
     }
-
-//    @Test
-//    public void testID() {
-//        assertEquals(worker.getID(),"v0g2b");
-//    }
 
     // this tests the CheckIn interface
     @Test
@@ -38,5 +37,29 @@ class WorkerTest {
     @Test
     public void leaveTest() {
         worker.leave();
+    }
+
+    @Test
+    public void addEmployerTest() {
+        worker.addEmployer(employer);
+        assertEquals(employer, worker.employer);
+        assertFalse(worker.employer == null);
+        worker.addEmployer(employer2);
+        assertFalse(employer.equals(worker.employer));
+        assertEquals(employer2, worker.employer);
+    }
+
+    @Test
+    public void removeEmployerTest() {
+        worker.addEmployer(employer);
+        assertEquals(employer, worker.employer);
+        worker.removeEmployer();
+        assertTrue(worker.employer == null);
+    }
+
+    @Test
+    public void getEmployersTest() {
+        worker.addEmployer(employer);
+        assertEquals(employer,worker.getEmployers());
     }
 }

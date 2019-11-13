@@ -1,4 +1,4 @@
-package placeholder.people;
+package placeholder;
 
 public abstract class Observable {
 }

@@ -1,11 +1,6 @@
 package placeholder.people;
 
-import placeholder.CheckIn;
-import placeholder.CheckOut;
-
 public abstract class Person {
-    CheckIn checkIn;
-    CheckOut checkOut;
 
     // EFFECTS: the visitor is greeted and asked for name
     // TODO: refactor

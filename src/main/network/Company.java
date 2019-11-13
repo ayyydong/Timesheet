@@ -1,5 +1,8 @@
 package network;
 
+import placeholder.ObservableValue;
+import placeholder.Observer;
+import placeholder.TextObserver;
 import placeholder.people.*;
 import system.TimeException;
 import system.Timer;
@@ -138,6 +141,9 @@ public class Company {
         }
     }
 
+    //this was taken from
+    // https://www.javaworld.com/article/2077258/observer-and-observable.html?fbclid
+    // =IwAR31sgl_AZZwd4zkHyxWjrXI1Uf6W6T5Uux7zNp5MOZ9refRfAtLOXVerzY
     private static void observPattern() {
         ObservableValue ov = new ObservableValue(0);
         TextObserver to = new TextObserver(ov);

@@ -1,4 +1,4 @@
-package placeholder.people;
+package placeholder;
 
 public class TextObserver implements Observer {
     private ObservableValue ov;

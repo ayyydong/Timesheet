@@ -1,12 +1,13 @@
-package placeholder.people;
+package placeholder;
 
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Set;
 
 public class ObservableValue extends Observable {
-    private int test;
-    private Set<TextObserver> observers;
+    public int test;
+    protected Set<Observer> observers;
+
 
     public ObservableValue(int test) {
         this.test = test;

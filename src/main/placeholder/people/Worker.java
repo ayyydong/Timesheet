@@ -58,24 +58,24 @@ public class Worker extends Person {
         checkOut.leave("You have been successfully checked out.");
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Worker emp = (Worker) o;
-        if (!emp.equals(emp.identity)) {
-            return false;
-        }
-        return emp.equals(emp.identity);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = identity.hashCode();
-        return result;
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) {
+//            return true;
+//        }
+//        if (o == null || getClass() != o.getClass()) {
+//            return false;
+//        }
+//        Worker emp = (Worker) o;
+//        if (!emp.equals(emp.identity)) {
+//            return false;
+//        }
+//        return emp.equals(emp.identity);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = identity.hashCode();
+//        return result;
+//    }
 }
