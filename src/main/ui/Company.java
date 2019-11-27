@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import placeholder.people.Employer;
 import placeholder.people.Staff;
 import placeholder.people.Visitor;
-import system.Clock;
+import ui.system.Clock;
 
 import java.util.regex.Pattern;
 

@@ -1,4 +1,4 @@
-package system;
+package ui.system;
 
 import javax.swing.*;
 import java.awt.*;
