@@ -15,22 +15,7 @@ class VisitorTest {
 
     @Test
     public void nameMatchesTest() {
-        assertEquals("Andy",(visitor.name));
-        assertFalse("AndyJr".equals(visitor.name));
-    }
-
-    @Test
-    public void greetingTest() {
-        visitor.greeting();
-    }
-
-    @Test
-    public void stayTest() {
-        visitor.stay();
-    }
-
-    @Test
-    public void leaveTest() {
-        visitor.leave();
+        assertEquals("Andy", visitor.getName());
+        assertFalse("AndyJr".equals(visitor.getName()));
     }
 }
