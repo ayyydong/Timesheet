@@ -20,7 +20,7 @@ class StaffTest {
     // this tests the CheckIn interface
     @Test
     void identityTest() {
-        assertEquals("a5h2v",worker.getIdentity());
+        assertEquals("a5h2v", worker.getIdentity());
         assertFalse("v5g2b" == worker.getIdentity());
     }
 
@@ -51,6 +51,6 @@ class StaffTest {
     @Test
     void getEmployersTest() {
         worker.addEmployer(employer);
-        assertEquals(employer,worker.getEmployers());
+        assertEquals(employer, worker.getEmployers());
     }
 }

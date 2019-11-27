@@ -13,6 +13,7 @@ import placeholder.people.Employer;
 import placeholder.people.Staff;
 import placeholder.people.Visitor;
 import system.Clock;
+
 import java.util.regex.Pattern;
 
 
@@ -123,7 +124,7 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         soBox.setAlignment(Pos.BOTTOM_CENTER);
         VBox vcAssemble = new VBox(200);
         vcAssemble.setAlignment(Pos.CENTER);
-        vcAssemble.getChildren().addAll(vcBox,soBox);
+        vcAssemble.getChildren().addAll(vcBox, soBox);
         clockAction();
 
         visitorCheckin = new Scene(vcAssemble, 450, 375);
@@ -220,7 +221,7 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         eoBox.setAlignment(Pos.BOTTOM_CENTER);
         VBox ecAssemble = new VBox(200);
         ecAssemble.setAlignment(Pos.CENTER);
-        ecAssemble.getChildren().addAll(empBox,eoBox);
+        ecAssemble.getChildren().addAll(empBox, eoBox);
         return ecAssemble;
     }
 
@@ -234,7 +235,7 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         eoBox.setAlignment(Pos.BOTTOM_CENTER);
         VBox ecAssemble = new VBox(200);
         ecAssemble.setAlignment(Pos.CENTER);
-        ecAssemble.getChildren().addAll(employBox,eoBox);
+        ecAssemble.getChildren().addAll(employBox, eoBox);
         return ecAssemble;
     }
 }
