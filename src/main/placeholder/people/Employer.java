@@ -11,11 +11,13 @@ public class Employer extends Staff {
         super(identity);
     }
 
+    // getters
     public Set<Staff> getEmployees() {
         return employees;
     }
 
-    //notifies employees
+    // MODIFIES: this
+    // EFFECTS: if employee is not in the set, add the employee
     public void assignEmployees(Staff employee) {
         if (!employees.contains(employee)) {
             employees.add(employee);
@@ -23,6 +25,9 @@ public class Employer extends Staff {
         }
     }
 
+    // REQUIRES: employees must not be empty
+    // MODIFIES: this
+    // EFFECTS: removes the employee from the set of employees
     public void removeEmployee(Staff employee) {
         employees.remove(employee);
         employee.removeEmployer();

@@ -16,12 +16,13 @@ public class Clock extends JFrame {
     public Clock() {
         super("Java Clock");
         setSize(225, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // will close clock, but not javafx
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
-        setResizable(true); //for now
+        setResizable(true);
         setLocationRelativeTo(null);
 
-        //initialize the panel
+        // initialize the panel
         panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
@@ -39,6 +40,9 @@ public class Clock extends JFrame {
     }
 
     class Listener implements ActionListener {
+
+        // MODIFIES: this
+        // EFFECTS: sets the clock time to be the present hour, minute and second
         public void actionPerformed(ActionEvent e) {
 
             Calendar rightNow = Calendar.getInstance();

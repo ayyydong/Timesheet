@@ -13,7 +13,6 @@ import placeholder.people.Employer;
 import placeholder.people.Staff;
 import placeholder.people.Visitor;
 import ui.system.Clock;
-
 import java.util.regex.Pattern;
 
 
@@ -29,7 +28,6 @@ public class Company extends Application implements EventHandler<ActionEvent> {
     Scene visitorCheckin;
     Button staffButton;
     Button visitorButton;
-    Button add = new Button("Add");
     Button submit = new Button("Enter");
     Button goBack = new Button("Go back");
     Button signout = new Button("Sign out");
@@ -47,6 +45,8 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         launch(args);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the first scene
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
@@ -57,6 +57,7 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         window.show();
     }
 
+    // EFFECTS: the template design for the mainScene that is ran by first window
     private VBox mainStructure() {
         //BUTTON FOR STAFF
         staffButton = new Button("I am a staff member");
@@ -83,10 +84,29 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         return assembleBox;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the window to display the given Scene
     public void goToScene(Scene s) {
         window.setScene(s);
     }
 
+    // EFFECTS: the template for the notification box
+    private VBox initTodoBox() {
+        VBox inputBox = new VBox();
+        inputBox.setAlignment(Pos.CENTER);
+        inputBox.getChildren().add(todo);
+        return inputBox;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: upon clicking the button "time",
+    // a new window with a clock will appear
+    private void clockAction() {
+        time.setOnAction(event -> new Clock());
+    }
+
+    // MODIFIES: this
+    // EFFECTS: redirects the window to login scenes depending on whether visitor or staff
     @Override
     public void handle(ActionEvent event) {
         // allows user to go back to mainScene if they mis-clicked
@@ -104,6 +124,29 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         }
     }
 
+    // EFFECTS: the template for the staff login scene
+    private void staffFrame() {
+        submit.setOnAction(event1 -> checker(staffInput.getText()));
+        staffInput.setMaxWidth(200); // width of text box
+        VBox svBox = new VBox(5);
+        svBox.getChildren().addAll(staffGreet, staffRequest, staffInput, submit, goBack);
+        svBox.setAlignment(Pos.CENTER);
+        staffScene = new Scene(svBox, 450, 375);
+    }
+
+    // EFFECTS: the template for the visitor login scene
+    private void visitorFrame() {
+        submit.setOnAction(event1 -> startToVisit());
+        visInput.setMaxWidth(200);
+        VBox vvBox = new VBox(5);
+        vvBox.getChildren().addAll(visGreet, visRequest, visInput, submit, goBack);
+        vvBox.setAlignment(Pos.CENTER);
+        visitorScene = new Scene(vvBox, 450, 375);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: a greeting Alert is displayed when name is typed,
+    // sets the window scene to the independent visitor scene
     private void startToVisit() {
         Alert nameGreet = new Alert(Alert.AlertType.INFORMATION);
         String name = visInput.getText();
@@ -117,8 +160,8 @@ public class Company extends Application implements EventHandler<ActionEvent> {
     // EFFECTS: Creates a frame that visitors will be able to access upon log-in
     private void visitorIsInFrame() {
         VBox vcBox = new VBox(5); //visitor check-in scene design
-        vcBox.getChildren().addAll(time, todo);
-        vcBox.setAlignment(Pos.TOP_LEFT);
+        vcBox.getChildren().addAll(time);
+        vcBox.setAlignment(Pos.CENTER);
         VBox soBox = new VBox();
         soBox.getChildren().add(signout);
         soBox.setAlignment(Pos.BOTTOM_CENTER);
@@ -131,28 +174,9 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         signoutAction(visitorCheckin);
     }
 
-    private void clockAction() {
-        time.setOnAction(event -> new Clock());
-    }
-
-    private void visitorFrame() {
-        submit.setOnAction(event1 -> startToVisit());
-        visInput.setMaxWidth(200);
-        VBox vvBox = new VBox(5);
-        vvBox.getChildren().addAll(visGreet, visRequest, visInput, submit, goBack);
-        vvBox.setAlignment(Pos.CENTER);
-        visitorScene = new Scene(vvBox, 450, 375);
-    }
-
-    private void staffFrame() {
-        submit.setOnAction(event1 -> checker(staffInput.getText()));
-        staffInput.setMaxWidth(200); // width of text box
-        VBox svBox = new VBox(5);
-        svBox.getChildren().addAll(staffGreet, staffRequest, staffInput, submit, goBack);
-        svBox.setAlignment(Pos.CENTER);
-        staffScene = new Scene(svBox, 450, 375);
-    }
-
+    // MODIFIES: this
+    // EFFECTS: if signout button is clicked will asked to confirm or cancel
+    // nothing happens if cancel, goes to main scene if confirm
     private void signoutAction(Scene s) {
         signout.setOnAction(event2 -> {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -165,24 +189,20 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         });
     }
 
-    private VBox initTodoBox() {
-        VBox inputBox = new VBox();
-        inputBox.setAlignment(Pos.CENTER);
-        inputBox.getChildren().addAll(todo);
-        return inputBox;
-    }
-
+    // EFFECTS: checks if the inputs from Textfield are found in the employer database
+    // will ask to try again if invalid
     public void checker(String input) {
         Alert success = new Alert(Alert.AlertType.INFORMATION);
         TextField todoInput = new TextField();
-        todoInput.setMaxWidth(200);
+        todoInput.setMaxWidth(300);
         submit.setOnAction(event -> todo.setText(todoInput.getText()));
         if (employer.identityCorrect(input)) {
             employerVerified(todoInput);
         }
         if (Pattern.matches("[a-z]\\d[a-z]\\d[a-z]", input)) {
-            if (!Pattern.matches(employer.identity, input)) { //5 characters long and follows format: letter,int...) {
-                employeeVerified(input, success, todoInput);
+            //5 characters long and follows format: letter,int...)
+            if (!Pattern.matches(employer.getIdentity(), input)) {
+                employeeVerified(input, success);
             }
         } else {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -192,14 +212,20 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         }
     }
 
-    private void employeeVerified(String input, Alert success, TextField todoInput) {
-        VBox ecAssemble = staffIsInFrame(input, success, todoInput);
+    // REQUIRES: Employee has been checked in
+    // MODIFIES: this
+    // EFFECTS: assembles the template for private Staff scene and window opens it
+    private void employeeVerified(String input, Alert success) {
+        VBox ecAssemble = staffIsInFrame(input, success);
 
         staffCheckin = new Scene(ecAssemble, 450, 375);
         signoutAction(staffCheckin);
         goToScene(staffCheckin);
     }
 
+    // REQUIRES: Employer has been checked in
+    // MODIFIES: this
+    // EFFECTS: assembles the template for private Employer scene and window opens it
     private void employerVerified(TextField todoInput) {
         VBox ecAssemble = employerIsInFrame(todoInput);
 
@@ -208,13 +234,15 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         goToScene(employerCheckin);
     }
 
-    private VBox staffIsInFrame(String input, Alert success, TextField todoInput) {
+    // EFFECTS: the template design for the private Staff scene
+    private VBox staffIsInFrame(String input, Alert success) {
         success.setContentText("You have been successfully checked in.");
         success.showAndWait();
         new Staff(input);
-        initTodoBox();
-        VBox empBox = new VBox(5);
-        empBox.getChildren().addAll(time, todoInput, submit, todoBox);//employee check-in scene design
+        todoBox = initTodoBox();
+        VBox empBox = new VBox(10);
+        empBox.getChildren().addAll(time, todoBox);//employee check-in scene design
+        empBox.setAlignment(Pos.CENTER);
         clockAction();
         VBox eoBox = new VBox();
         eoBox.getChildren().add(signout);
@@ -225,10 +253,13 @@ public class Company extends Application implements EventHandler<ActionEvent> {
         return ecAssemble;
     }
 
+    // EFFECTS: the template design for the private Employer scene
     private VBox employerIsInFrame(TextField todoInput) {
+        Label compose = new Label("Write your notification here");
         VBox employBox = new VBox(5); //employer check-in scene design
         todoBox = initTodoBox();
-        employBox.getChildren().addAll(time, todoInput, submit, todoBox);
+        employBox.getChildren().addAll(time, compose, todoInput, submit, todoBox);
+        employBox.setAlignment(Pos.CENTER);
         clockAction();
         VBox eoBox = new VBox();
         eoBox.getChildren().add(signout);
