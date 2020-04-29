@@ -15,6 +15,7 @@ import placeholder.people.Visitor;
 import ui.system.Clock;
 import java.util.regex.Pattern;
 
+
 // Represents the Company
 public class Company extends Application implements EventHandler<ActionEvent> {
     Employer employer = new Employer("v0g2b");
